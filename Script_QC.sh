@@ -260,13 +260,6 @@ perl convert2annovar.pl -format vcf4 /path/to/file/file.vcf > /path/to/file/file
 ~/annovar/table_annovar.pl ~/selected_vcf/combined.avinput ~/annovar/humandb -buildver hg38 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp30a,clinvar -operation g,r,f,f,f,f -nastring NA -csvout -polish
 
 
-
-
-
-
-
-
-
 #!/bin/bash
 
 OUTPUT_DIR="$HOME/fourth_qcoutput"  # Use HOME for output directory
