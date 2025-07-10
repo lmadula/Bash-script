@@ -1,0 +1,230 @@
+---
+title: "Analysis"
+author: "Lusanda_Madula"
+date: "2024-08-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Load the packages
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+# Load the dataset for different patients. The output if from VEP(Variant effect predictor)
+
+```{r}
+## For patient one (ZA154)
+G2019S_ZA154 <- read_delim("Data_VEP_output/G2019S_ZA154.txt",delim = "\t", 
+                           escape_double = FALSE,trim_ws = TRUE, show_col_types = FALSE)
+
+ZA154 <- read_delim("Data_VEP_output/G2019S_ZA154.txt",delim = "\t", 
+                         escape_double = FALSE,trim_ws = TRUE, show_col_types = FALSE)
+
+## Select only the columns that are essential and look at the location of LRRK2
+
+essential_variables_1<- ZA154 %>% 
+                        filter(str_detect(Location, "^12:40340400+")) %>% 
+                        select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+
+                
+## For patient two
+G2019S_ZA456 <- read_delim("Data_VEP_output/G2019S_ZA456.txt",delim = "\t", 
+                           escape_double = FALSE,trim_ws = TRUE, show_col_types = FALSE)
+
+## Select only the columns that are essential and look at the location of LRRK2
+essential_variables_2 <- G2019S_ZA456 %>% 
+                        filter(str_detect(Location, "^12:40340400+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+
+
+
+## For patient three
+
+G2019S_ZA206 <- read_delim("Data_VEP_output/G2019S_ZA206.txt",delim = "\t", escape_double = FALSE,trim_ws = TRUE)
+
+essential_variables_3 <- G2019S_ZA206 %>% 
+                        filter(str_detect(Location, "^12:40340400+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+
+## For patient four
+
+G2019S_ZA594 <- read_delim("Data_VEP_output/G2019S_ZA594.txt",delim = "\t", escape_double = FALSE,trim_ws = TRUE)
+
+essential_variables_4<- G2019S_ZA594 %>% 
+                        filter(str_detect(Location, "^12:40340400+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+
+
+## For patient five
+
+G2019S_ZA523 <- read_delim("Data_VEP_output/G2019S_ZA523.txt",delim = "\t", escape_double = FALSE,trim_ws = TRUE)
+
+essential_variables_5<- G2019S_ZA523 %>% 
+                        filter(str_detect(Location, "^12:40340400+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+
+
+## For patient six
+
+G2019S_ZA85 <- read_delim("Data_VEP_output/G2019S_ZA85.txt",delim = "\t", escape_double = FALSE,trim_ws = TRUE)
+
+essential_variables_6<- G2019S_ZA85 %>% 
+                        filter(str_detect(Location, "^12:40340400+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+
+
+
+## For patient seven
+G2019S_ZA40 <- read_delim("Data_VEP_output/G2019S_ZA40.txt",delim = "\t", escape_double = FALSE,trim_ws = TRUE)
+
+essential_variables_7<- G2019S_ZA40 %>% 
+                        filter(str_detect(Location, "^12:40340400+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+
+
+## For patient 8
+G2019S_ZA133 <- read_delim("Data_VEP_output/G2019S_ZA133.txt",delim = "\t", escape_double = FALSE,trim_ws = TRUE)
+
+essential_variables_8<- G2019S_ZA133 %>% 
+                        filter(str_detect(Location, "^12:40340400+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+
+
+## For patient 9
+R1441C_ZA224 <- read_delim("Data_VEP_output/R1441C_ZA224.txt",delim = "\t", escape_double = FALSE,trim_ws = TRUE)
+
+
+essential_variables_9<- R1441C_ZA224 %>% 
+                        filter(str_detect(Location, "^12:40310434+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+
+
+
+## For patient 10
+G430D_ZA108 <- read_delim("Data_VEP_output/G430D_ZA108.txt",delim = "\t", escape_double = FALSE,trim_ws = TRUE)
+
+essential_variables_10 <- G430D_ZA108 %>% 
+                        filter(str_detect(Location, "^6:161350208+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+## For patient 11
+R275W_M432V_ZA340 <- read_delim("Data_VEP_output/R275W_M432V_ZA340.txt",delim = "\t", escape_double = FALSE,trim_ws = TRUE)
+
+essential_variables_11 <- R275W_M432V_ZA340 %>% 
+                        filter(str_detect(Location, "^6:161785820+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+
+## Using the different variant M432V_340
+
+R275W_M432V_ZA340 <- read_delim("Data_VEP_output/R275W_M432V_ZA340.txt",delim = "\t", escape_double = FALSE,trim_ws = TRUE)
+
+essential_variables_12 <- R275W_M432V_ZA340 %>% 
+                        filter(str_detect(Location, "^6:161350203+")) %>% 
+                         select(Location,SYMBOL,Allele, REF_ALLELE,STRAND,UPLOADED_ALLELE, 
+                               Protein_position, Amino_acids, Codons, 
+                                Existing_variation, CADD_PHRED, PHENOTYPES, SIFT, PolyPhen)
+```
+
+
+# Load the dataset for all positive control from ANNOVAR
+
+```{r}
+## Original dataset
+
+myanno_hg38_multianno <- read_csv("Data_VEP_output/myanno.hg38_multianno.csv", show_col_types = FALSE)
+
+##Select the essential variables
+
+annovar_positive_controls <- myanno_hg38_multianno %>% 
+                              select(Chr:Gene.refGene, AAChange.refGene, ExonicFunc.refGene,  
+                                     avsnp147, SIFT_score, Polyphen2_HDIV_score, 
+                                     FATHMM_score, CADD_phred, CLNDN)
+
+
+##Filter rows containing "Parkinson" or "Parkinsonian" 
+
+Phenotype_PD <- annovar_positive_controls %>%
+                filter(str_detect(CLNDN, regex("Parkinson|Parkinsonian", ignore_case = TRUE))) %>%                          mutate(Parkinson_disease = sapply(str_extract_all(CLNDN, 
+                                  regex("([^|]*Parkinson[^|]*|[^|]*Parkinsonian[^|]*)",
+                                        ignore_case =TRUE)),function(x) paste(x, collapse = ", ")))
+
+##Extract the information based on the exon
+
+Phenotype_PD <- Phenotype_PD %>%
+                   mutate(exon_extract = str_extract_all(AAChange.refGene, "exon[^,]*") %>% 
+                      sapply(function(x) paste(gsub('c\\(|"|', '', x), collapse = ";")))
+
+
+
+##Define Filtering Criteria (based on the in silico pathogenicity prediction scores)
+
+cadd_cutoff <- 20
+polyphen_cutoff <- 0.5
+sift_cutoff <- 0.15  ### Adjusted cutoff
+fathmm_cutoff <- 0
+
+##Filter Variants based on the in silico pathogenicity prediction tools
+
+filtered_variants_phenotye <- Phenotype_PD %>%
+                               filter(CADD_phred >= cadd_cutoff |
+                                      Polyphen2_HDIV_score > polyphen_cutoff |
+                                          SIFT_score < sift_cutoff |
+                                         FATHMM_score < fathmm_cutoff) %>%
+                                            view()
+
+##Display the filtered variants
+
+print(filtered_variants_phenotye)
+
+
+
+##Screen all patient using their rsID's
+##Define the rsIDs to extract
+
+#rsids_to_extract <- c("rs34637584", "rs33939927", "rs191486604", "rs34424986", "rs756783990")
+
+##Filter the dataset
+#filter_phenotypes_PD <- Phenotype_PD %>% 
+                          #filter(avsnp147 %in% rsids_to_extract)
+
+## save as csv
+#selected_filter_phenotypes <- filter_phenotypes_PD %>% 
+                              #select(Chr, Start,Ref,Alt,Func.refGene, Gene.refGene,
+                                     #exon_extract, ExonicFunc.refGene, avsnp147,
+                                     #SIFT_score:CADD_phred, Parkinson_disease)
+
+#write.csv(selected_filter_phenotypes, "Selected_filte.csv", row.names = FALSE)
+```
+
+
+
+
+
